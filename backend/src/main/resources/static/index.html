@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080a12">
+  <meta name="description" content="Private password intelligence from CIPHERΛ.">
+  <title>CIPHERΛ — Password Intelligence</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <div class="ambient ambient-violet" aria-hidden="true"></div>
+  <div class="ambient ambient-cyan" aria-hidden="true"></div>
+  <div class="page-shell">
+    <header class="topbar">
+      <a class="wordmark" href="/" aria-label="CIPHER Lambda home">CIPHER<span>Λ</span></a>
+      <span class="nav-caption">Personal Password Intelligence</span>
+      <div class="local-status" aria-live="polite"><span class="status-dot" id="health-dot"></span><span id="health-text">Connecting…</span></div>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="eyebrow"><span class="eyebrow-line"></span> A clearer view of your security</div>
+        <h1 id="hero-title">Know the strength<br class="desktop-break"> of your password.</h1>
+        <p class="hero-copy">Analyze password security instantly without storing your password.</p>
+      </section>
+
+      <div class="workspace">
+        <section class="glass-card analyzer-card" aria-labelledby="analyzer-title">
+          <div class="card-topline"><span class="step-mark">01</span><span class="micro-label">PASSWORD CHECK</span><span class="card-rule"></span><span class="mini-lock" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="11" rx="2"></rect><path d="M8 10V7a4 4 0 0 1 8 0v3"></path></svg></span></div>
+          <h2 id="analyzer-title">Start with a password</h2>
+          <p class="card-description">We’ll check its length, character variety, and common patterns.</p>
+          <form id="analyze-form" novalidate>
+            <label for="password">PASSWORD</label>
+            <div class="password-field">
+              <svg class="field-lock" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="11" rx="2"></rect><path d="M8 10V7a4 4 0 0 1 8 0v3"></path></svg>
+              <input id="password" type="password" autocomplete="new-password" placeholder="Enter a password to analyze" aria-describedby="form-message privacy-note" spellcheck="false">
+              <button id="toggle-password" class="visibility-toggle" type="button" aria-label="Show password" aria-pressed="false">Show</button>
+            </div>
+            <p id="form-message" class="form-message" role="alert" aria-live="polite"></p>
+            <button id="analyze-button" class="primary-button" type="submit">
+              <span class="button-text">Analyze Security</span>
+              <span class="button-arrow" aria-hidden="true">↗</span>
+              <span class="button-spinner" aria-hidden="true"></span>
+            </button>
+          </form>
+          <div class="privacy-note" id="privacy-note"><span class="privacy-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3 19 6v5c0 4.8-3 8.3-7 10-4-1.7-7-5.2-7-10V6l7-3Z"></path><path d="m9 12 2 2 4-4"></path></svg></span><p><strong>Private by design</strong><span>Your password is analyzed locally through this application and is never stored.</span></p></div>
+        </section>
+
+        <section class="glass-card report-card" id="results" aria-labelledby="report-title" aria-live="polite">
+          <div class="card-topline"><span class="step-mark">02</span><span class="micro-label">YOUR REPORT</span><span class="card-rule"></span><span class="report-live"><i></i> READY</span></div>
+          <div id="empty-state" class="empty-state">
+            <div class="empty-emblem" aria-hidden="true"><svg viewBox="0 0 64 64"><path d="M32 7 51 15v14c0 13-8 22-19 28C21 51 13 42 13 29V15L32 7Z"></path><path d="M26 31v-4a6 6 0 0 1 12 0v4M24 31h16v13H24z"></path></svg><span></span></div>
+            <h2 id="report-title">Your security report<br>will appear here.</h2>
+            <p>Run an analysis to see a detailed view of password strength and security checks.</p>
+            <span class="empty-caption">NO PASSWORD DATA YET</span>
+          </div>
+          <div id="analysis-report" hidden>
+            <div class="report-heading"><div><p class="result-kicker">SECURITY OVERVIEW</p><h2 id="report-title-result">Analysis complete</h2></div><span id="strength-pill" class="strength-pill">STRONG</span></div>
+            <div class="score-layout">
+              <div id="score-ring" class="score-ring" role="img" aria-label="Password security score"><div class="ring-inner"><strong id="score">0</strong><span>/ 100</span></div></div>
+              <div class="score-detail"><span class="micro-label">PASSWORD STRENGTH</span><strong id="strength-text">Strong</strong><span id="score-caption" class="score-caption"></span></div>
+            </div>
+            <div class="progress-meta"><span>Strength score</span><span id="score-fraction">0 / 100</span></div>
+            <div 
+            class="progress-track" 
+            role="progressbar" 
+            aria-label="Password strength score" 
+            aria-valuemin="0" 
+            aria-valuemax="100" 
+            aria-valuenow="0">
+            
+            <div id="progress" 
+            class="progress">
+        </div>
+        </div>
+            <section class="checks-section" aria-labelledby="checks-title"><div class="section-heading"><h3 id="checks-title">Security Checks</h3><span id="check-count" class="check-count"></span></div><ul id="checks" class="check-list"></ul></section>
+            <section id="warnings-box" class="notes-section" aria-labelledby="notes-title" hidden><div class="section-heading"><h3 id="notes-title">Security Notes</h3><span class="notes-mark" aria-hidden="true">!</span></div><ul id="warnings" class="warnings-list"></ul></section>
+            <p id="no-warnings" class="positive-note" hidden><span aria-hidden="true">✓</span>No security warnings detected.</p>
+          </div>
+        </section>
+      </div>
+
+      <section class="privacy-panel" aria-label="Privacy information"><span class="privacy-panel-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3 19 6v5c0 4.8-3 8.3-7 10-4-1.7-7-5.2-7-10V6l7-3Z"></path><path d="m9 12 2 2 4-4"></path></svg></span><div><span class="micro-label">PRIVACY FIRST</span><p>Passwords are processed for analysis and are not stored by this application.</p></div><span class="privacy-panel-aside">LOCAL<br>PROCESSING</span></section>
+    </main>
+    <footer class="footer"><a class="footer-brand" href="/">CIPHER<span>Λ</span></a><span class="footer-subtitle">Personal Password Intelligence</span><span class="footer-tech">Built with Java <b>·</b> Python <b>·</b> HTML <b>·</b> CSS</span></footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: cipher-lambda-api
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /api/health
+    envVars:
+      - key: PYTHON_EXECUTABLE
+        value: python3
+      - key: PYTHON_SCRIPT
+        value: ../python/analyzer.py
+      - key: LOGGING_LEVEL_ORG_SPRINGFRAMEWORK_WEB
+        value: INFO
